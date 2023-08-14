@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF GENERATOR</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <textarea id="client-name" placeholder="Nom du client"></textarea>
+        <textarea id="client-adresse" placeholder="Adresse du client"></textarea>
+        <textarea id="client-ville" placeholder="Ville du client"></textarea>
+        <textarea id="client-pays" placeholder="Pays du client"></textarea>
+        <textarea id="Sujetintervention" placeholder="Sujet du devis"></textarea>
+        <textarea id="Sujetintervention_sous" placeholder="Description du devis"></textarea>
+        <input type="date" id="date">
+        <button onclick="generatePDF()">Générer Devis PDF</button>
+        <button type="button" onclick="addPrestation()">Ajouter Prestation</button>
+        <div id="prestations-container">
+            <!-- Les champs de prestation seront ajoutés ici -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        let prestationCount = 0; // Compteur pour les champs de prestation
+        let prestationInputs = '';
+
+        function addPrestation() {
+            prestationCount++;
+            const container = document.getElementById("prestations-container");
+            const designation = `designation${prestationCount}`;
+            const price = `price${prestationCount}`;
+
+            const prestationDiv = document.createElement("div");
+            prestationDiv.innerHTML = `
+                <div>
+                    <input id="${designation}" type="text" placeholder="Designation">
+                    <input id="${price}" type="text" placeholder="Price">
+                </div>
+            `;
+
+            container.appendChild(prestationDiv);
+        }
+
+        function generatePDF() {
+
+            let totalPrice = 0;
+
+
+            const prestations = [];
+            for (let i = 1; i <= prestationCount; i++) {
+                const designation = document.getElementById(`designation${i}`).value;
+                const price = document.getElementById(`price${i}`).value;
+                prestations.push({ designation, price });
+            }
+
+            console.log(prestations);
+
+
+            var form_date = document.getElementById("date").value;
+            var form_client_name = document.getElementById("client-name").value;
+            var form_client_adresse = document.getElementById("client-adresse").value;
+            var form_client_ville = document.getElementById("client-ville").value;
+            var form_client_pays = document.getElementById("client-pays").value;
+            var form_sujet = document.getElementById("Sujetintervention").value;
+            var form_sujet_sous = document.getElementById("Sujetintervention_sous").value;
+
+            var contentDiv = document.getElementById("content");
+
+            var pieceDiv = document.createElement("div");
+            pieceDiv.className = "piece";
+
+
+
+            for (let i = 0; i < prestationCount; i++) {
+                const premierePrestation = prestations[i];
+
+                console.log(premierePrestation["designation"]);
+
+                totalPrice += parseFloat(premierePrestation.price);
+
+                const designation = premierePrestation["designation"];
+                prestationInputs += `
+                    <div class="ligne">
+                        <div class="lignenumero">
+                            <h3>${i + 1}</h3>
+                        </div>
+                        <div class="lignedesi">
+                            <h3>${designation}</h3>
+                        </div>
+                        <div class="ligneqte">
+                            <h3></h3>
+                        </div>
+                        <div class="ligneprixU">
+                            <h3>${premierePrestation.price}</h3>
+                        </div>
+                        <div class="lignetva">
+                            <h3></h3>
+                        </div>
+                        <div class="lignetotalHt">
+                            <h3></h3>
+                        </div>
+                    </div>
+                `;
+
+
+                if (i == prestations) {
+                    return prestationInputs
+                }
+            }
+
+
+            var form_date = new Date(document.getElementById("date").value);
+
+            var formdevisdata = new Date(form_date);
+            formdevisdata.setMonth(formdevisdata.getMonth() + 3);
+
+            pieceDiv.innerHTML = `
+    <div class="piece">
+        <div class='topDevis'>
+            <h2>Logo</h2>
+            <div class="topDevisBox">
+                <h1>Devis</h1>
+                <p>Date de création: ${form_date.toLocaleDateString()}</p>
+                <p>Échéance au: ${formdevisdata.toLocaleDateString()}</p>
+            </div>
+        </div>
+        <div class="topDevis2">
+            <div class="SocieteInfo">
+                <p>Nom de la societe</p>
+                <p>Adresse de la societe</p>
+                <p>Ville de la societe</p>
+                <p>Tél: numero</p>
+                <p>N*SIRET : numero de siret</p>
+            </div>
+            <div class="ClientInfo">
+                <p>${form_client_name}</p>
+                <p>${form_client_adresse}</p>
+                <p>${form_client_ville}</p>
+                <p>${form_client_pays}</p>
+            </div>
+        </div>
+        <div class='topDevisInfo'>
+        
+            <p>${form_sujet}</p>
+            <p>${form_sujet_sous}</p>
+        </div>
+        <div class="disignation">
+            <div class="numero">
+                <h3>N°</h3>
+            </div>
+            <div class="desi">
+                <h3>DESIGNATION</h3>
+            </div>
+            <div class="prixU">
+                <h3>PRIX U.</h3>
+            </div>
+        </div>
+        ${prestationInputs}
+        <div class="price">
+            <div class="acceptPaiment">
+                <p>Conditions de paiement</p>
+                <p>Méthodes de paiement acceptées : Chèque, Virement bancaire, Carte Bancaire</p>
+            </div>
+            <div class="PriceInfo">
+                <div class="inforesult infoprice">
+                    <p>TOTAL</p>
+                    <p class="input">${totalPrice.toFixed(2)}  €</p>
+                </div>
+            </div>
+        </div>
+        <div class="signature">
+            <p>Pour le client</p>
+            <div class="signClient">
+                <p>Mention "Bon pour accord", date et signature</p>
+                <p class="date">...../...../..........</p>
+            </div>
+        </div>
+    </div>
+
+            `;
+
+            contentDiv.appendChild(pieceDiv);
+            generateurPDF();
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                generateurPDF();
+            }
+        });
+
+        function generateurPDF() {
+            const piece = document.querySelector('.piece');
+
+            html2pdf()
+                .from(piece)
+                .set({ margin: 0, filename: 'example.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 4 } })
+                .save();
+        }
+    </script>
+</body>
+
+</html>

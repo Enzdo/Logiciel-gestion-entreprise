@@ -1,0 +1,227 @@
+/* Police d'écriture */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    background-color: #ffffff;
+}
+
+#text {
+    width: 50%;
+    height: 60%;
+    resize: none;
+    padding: 20px;
+    outline: 0;
+    margin-bottom: 25px;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+button {
+    padding: 5px 25px;
+    border-radius: 6px;
+    border: 0;
+    cursor: pointer;
+}
+
+.piece {
+    width: 793px;
+    height: fit-content;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.topDevis {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topDevis h2 {
+    width: 40%;
+    height: 100%;
+    font-size: 30px;
+}
+
+.topDevis .topDevisBox {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end
+}
+
+.topDevis .topDevisBox h1 {
+    font-size: 20px;
+    color: aquamarine;
+}
+
+.topDevis .topDevisBox h1 {
+    font-size: 20px;
+    color: aquamarine;
+}
+
+.topDevis2 {
+    padding: 20px 0;
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.topDevis2 .SocieteInfo {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.topDevis2 .ClientInfo {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(128, 128, 128, 0.176);
+    padding: 10px;
+}
+
+.topDevisInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.disignation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: aquamarine;
+    padding: 5px 10px;
+}
+
+
+.disignation .prixU,
+.disignation .numero {
+    width: 10%;
+    font-size: 10px;
+}
+
+.disignation .desi {
+    width: 70%;
+    font-size: 10px;
+}
+
+.ligne {
+    border: 0.5px solid rgba(128, 128, 128, 0.267);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 5px 10px;
+    font-size: 10px;
+
+}
+
+.ligne h3 {
+    font-weight: 400;
+}
+
+.ligne .lignedesi {
+    width: 70%;
+}
+
+.ligne .ligneprixU,
+.ligne .lignenumero {
+    width: 10%;
+}
+
+.price {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+    font-size: 13px;
+}
+
+.price .acceptPaiment {
+    width: 40%;
+}
+
+.price .PriceInfo {
+    width: 40%;
+
+}
+
+
+
+.price .PriceInfo .infoprice {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.price .PriceInfo .infoprice p {
+    width: 50%;
+}
+
+.price .PriceInfo .infoprice .input {
+    text-align: end;
+}
+
+.signature {
+    font-size: 13px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
+}
+
+.signature p {
+    width: 50%;
+}
+
+.signature .signClient {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    border: 1px solid gray;
+    border-radius: 12px;
+    padding: 10px;
+    height: 200px;
+}
+
+.signature .signClient p {
+    width: 100%;
+}
